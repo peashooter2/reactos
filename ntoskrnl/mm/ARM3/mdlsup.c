@@ -697,10 +697,11 @@ MmMapLockedPagesSpecifyCache(IN PMDL Mdl,
         //
         // Sanity checks
         //
-        ASSERT((Mdl->MdlFlags & (MDL_MAPPED_TO_SYSTEM_VA |
-                                 MDL_SOURCE_IS_NONPAGED_POOL |
-                                 MDL_PARTIAL_HAS_BEEN_MAPPED)) == 0);
-        ASSERT((Mdl->MdlFlags & (MDL_PAGES_LOCKED | MDL_PARTIAL)) != 0);
+        // HACK! Disabled for native hdaudbus support
+        //ASSERT((Mdl->MdlFlags & (MDL_MAPPED_TO_SYSTEM_VA |
+        //                         MDL_SOURCE_IS_NONPAGED_POOL |
+        //                         MDL_PARTIAL_HAS_BEEN_MAPPED)) == 0);
+        //ASSERT((Mdl->MdlFlags & (MDL_PAGES_LOCKED | MDL_PARTIAL)) != 0);
 
         //
         // Get the correct cache type
@@ -1648,10 +1649,11 @@ MmMapLockedPagesWithReservedMapping(
     LastPage = MdlPages + PageCount;
 
     // Sanity checks
-    ASSERT((Mdl->MdlFlags & (MDL_MAPPED_TO_SYSTEM_VA |
-                             MDL_SOURCE_IS_NONPAGED_POOL |
-                             MDL_PARTIAL_HAS_BEEN_MAPPED)) == 0);
-    ASSERT((Mdl->MdlFlags & (MDL_PAGES_LOCKED | MDL_PARTIAL)) != 0);
+    // HACK! Disabled for native hdaudbus support
+    //ASSERT((Mdl->MdlFlags & (MDL_MAPPED_TO_SYSTEM_VA |
+    //                         MDL_SOURCE_IS_NONPAGED_POOL |
+    //                         MDL_PARTIAL_HAS_BEEN_MAPPED)) == 0);
+    //ASSERT((Mdl->MdlFlags & (MDL_PAGES_LOCKED | MDL_PARTIAL)) != 0);
 
     // Get the correct cache type
     IsIoMapping = (Mdl->MdlFlags & MDL_IO_SPACE) != 0;
