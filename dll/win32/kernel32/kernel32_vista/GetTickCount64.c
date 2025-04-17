@@ -12,7 +12,11 @@ GetTickCount64(VOID)
 
     TickCount = KiReadSystemTime(&SharedUserData->TickCount);
 
+#ifdef _WIN64
+    return (TickCount.QuadPart * SharedUserData->TickCountMultiplier) >> 24;
+#else
     ULONG TickCountMultiplier = SharedUserData->TickCountMultiplier;
     return (UInt32x32To64(TickCount.LowPart, TickCountMultiplier) >> 24) +
            (UInt32x32To64(TickCount.HighPart, TickCountMultiplier) << 8);
+#endif
 }
